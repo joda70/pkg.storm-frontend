@@ -54,9 +54,9 @@ rpm: prepare-spec
 		$(rpmbuild_dir)/SRPMS
 	cp $(source_dir)/$(name).tar.gz $(rpmbuild_dir)/SOURCES/$(name)-$(rpm_version).tar.gz
 ifndef BUILD_NUMBER
-        rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)"
+	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)"
 else
-        rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "build_number $(BUILD_NUMBER)"
+	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "build_number $(BUILD_NUMBER)"
 endif
 
 clean:
