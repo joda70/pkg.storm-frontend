@@ -1,0 +1,24 @@
+FROM  italiangrid/build-centos7
+
+run yum -y install pkgconfig \
+  boost-devel \
+  curl-devel \
+  mysql-devel \
+  globus-gssapi-gsi-devel \
+  globus-gss-assist-devel \
+  globus-common-devel \
+  globus-gridmap-callout-error-devel \
+  globus-gsi-credential-devel \
+  krb5-devel \
+  gsoap-devel \
+  CGSI-gSOAP-devel \
+  libuuid-devel \
+  voms \
+  storm-xmlrpc-c-devel \
+  argus-pep-api-c \
+  argus-pep-api-c-devel
+user build
+add Makefile ./storm-frontend-server.spec.in /home/build/
+workdir /home/build
+
+cmd /bin/bash -c make
