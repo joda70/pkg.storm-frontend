@@ -1,28 +1,29 @@
 FROM  italiangrid/build-centos6
 
-ADD emi3-updates.repo storm_develop_sl6.repo /etc/yum.repos.d/
-ADD RPM-GPG-KEY-emi /etc/pki/rpm-gpg/
+ADD storm_develop_sl6.repo /etc/yum.repos.d/
 
-run yum -y install pkgconfig \
-  boost-devel \
-  curl-devel \
-  mysql-devel \
-  globus-gssapi-gsi-devel \
-  globus-gss-assist-devel \
-  globus-common-devel \
-  globus-gridmap-callout-error-devel \
-  globus-gsi-credential-devel \
-  krb5-devel \
-  gsoap-devel \
-  CGSI-gSOAP-devel \
-  libuuid-devel \
-  voms \
-  storm-xmlrpc-c-devel \
-  argus-pep-api-c \
-  argus-pep-api-c-devel
+RUN wget --no-check-certificate http://emisoft.web.cern.ch/emisoft/dist/EMI/3/sl6/x86_64/base/emi-release-3.0.0-2.el6.noarch.rpm && \
+    yum localinstall --nogpgcheck -y emi-release-3.0.0-2.el6.noarch.rpm && \
+    yum -y install pkgconfig \
+    boost-devel \
+    curl-devel \
+    mysql-devel \
+    globus-gssapi-gsi-devel \
+    globus-gss-assist-devel \
+    globus-common-devel \
+    globus-gridmap-callout-error-devel \
+    globus-gsi-credential-devel \
+    krb5-devel \
+    gsoap-devel \
+    CGSI-gSOAP-devel \
+    libuuid-devel \
+    voms \
+    storm-xmlrpc-c-devel \
+    argus-pep-api-c \
+    argus-pep-api-c-devel
  
-user build
-add Makefile ./storm-frontend-server.spec.in /home/build
-workdir /home/build
+USER build
+ADD Makefile ./storm-frontend-server.spec.in /home/build/
+WORKDIR /home/build
 
-cmd /bin/bash -c make
+CMS /bin/bash -c make
