@@ -26,4 +26,4 @@ USER build
 ADD Makefile ./storm-frontend-server.spec.in /home/build/
 WORKDIR /home/build
 
-CMS /bin/bash -c make
+CMD /bin/bash -c make
