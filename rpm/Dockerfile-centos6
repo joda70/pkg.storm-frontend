@@ -1,5 +1,7 @@
 FROM  italiangrid/build-centos6
 
+ADD storm_develop_sl6.repo /etc/yum.repos.d/
+
 run yum -y install pkgconfig \
   boost-devel \
   curl-devel \
