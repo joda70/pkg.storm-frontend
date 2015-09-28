@@ -1,6 +1,7 @@
 FROM  italiangrid/build-centos6
 
-ADD storm_develop_sl6.repo /etc/yum.repos.d/
+ADD emi3-updates.repo storm_develop_sl6.repo /etc/yum.repos.d/
+ADD RPM-GPG-KEY-emi /etc/pki/rpm-gpg/
 
 run yum -y install pkgconfig \
   boost-devel \
@@ -18,9 +19,10 @@ run yum -y install pkgconfig \
   voms \
   storm-xmlrpc-c-devel \
   argus-pep-api-c \
-  argus-pep-api-c-devel 
+  argus-pep-api-c-devel
+ 
 user build
-add Makefile ./storm-frontend-server.spec.in /home/build/
+add Makefile ./storm-frontend-server.spec.in /home/build
 workdir /home/build
 
 cmd /bin/bash -c make
